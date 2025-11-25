@@ -1,7 +1,9 @@
-CSGBox3D
 CollisionShape3D
+CSGSphere3D
+Area3D
 StaticBody3D
 Node3D
+CSGBox3D
 DirectionalLight3D
 WorldEnvironment
 XRController3D

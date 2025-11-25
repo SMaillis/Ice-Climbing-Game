@@ -1,0 +1,64 @@
+extends Node3D
+
+@onready var YellowBubble = load("res://Scenes/LeftBubbleCursor.tscn")
+var collided_object = null
+var grabbed_object = null
+var grab_position = null
+var instance = null
+
+func _process(delta):
+	if grabbed_object:
+		#make sure only one of the controllers is grabbing this object
+		if not $"../RightHand".grabbed_object:
+			#make sure that when we regrab the object it 
+			#doesn't snap to our controller
+			grabbed_object.get_parent().get_parent().global_position.x += global_position.x - grab_position.x
+			grabbed_object.get_parent().get_parent().global_position.y += global_position.y - grab_position.y
+					
+		grab_position = global_position
+		
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if collided_object == null:
+		#make sure that when we grab an object we can't spawn a bubble
+		#by exiting and re-entering its area
+		if not grabbed_object:
+			instance = YellowBubble.instantiate()
+			body.add_child(instance)
+		collided_object = body
+		
+		
+
+
+func _on_area_3d_body_exited(body: Node3D) -> void:
+		#if the bubble is instantiated and we leave a body get rid of it
+
+	if body.get_child_count() >= 3:
+		body.get_node("LeftBubbleCursor").queue_free()
+		instance = null
+	collided_object = null
+
+
+func _on_button_pressed(name: String) -> void:
+	if name == "grip_click":
+		if collided_object:
+			#when we grab the object get rid of the bubble
+			if collided_object.get_child_count() >= 3:
+				collided_object.get_node("LeftBubbleCursor").queue_free()
+				instance = null
+			grabbed_object = collided_object
+			grab_position = global_position
+
+func _on_button_released(name: String) -> void:
+	if name == "grip_click":
+		if grabbed_object:
+			if (not $"../RightHand".grabbed_object):
+				grabbed_object.get_parent().get_parent().global_position.x = 0
+				grabbed_object.get_parent().get_parent().global_position.y = 0
+			grabbed_object = null
+			grab_position = null
+		#if we release an object but our cursor is still inside its area
+		#then re-instantiate the bubble
+		if collided_object:
+			instance = YellowBubble.instantiate()
+			collided_object.add_child(instance)

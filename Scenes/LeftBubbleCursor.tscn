@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfffdfiicch42"]
+
+[ext_resource type="Material" uid="uid://bih0f1rtyv73b" path="res://Materials/TransparentYellow.tres" id="1_l4v2p"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bdyyb"]
+radius = 0.15
+
+[node name="LeftBubbleCursor" type="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Area3D"]
+material_override = ExtResource("1_l4v2p")
+radius = 0.15
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_bdyyb")
