@@ -1,0 +1,9 @@
+CSGBox3D
+CollisionShape3D
+StaticBody3D
+Node3D
+DirectionalLight3D
+WorldEnvironment
+XRController3D
+XRCamera3D
+XROrigin3D
