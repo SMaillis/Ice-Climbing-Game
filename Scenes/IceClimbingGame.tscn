@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://btmr05s0k05vr"]
+[gd_scene load_steps=19 format=3 uid="uid://btmr05s0k05vr"]
 
 [ext_resource type="Material" uid="uid://cxvhjkhjhn2jk" path="res://Materials/Snow.tres" id="1_nu2qm"]
 [ext_resource type="Script" uid="uid://1gxlon2ql1bk" path="res://Scripts/XRScript.gd" id="1_vx4eu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://c1aqykljntwce" path="res://Scripts/BothHandsLatch.gd" id="5_3v1bd"]
 [ext_resource type="Script" uid="uid://b6vccgp4lw5vh" path="res://Scripts/LeftHandGrab.gd" id="6_qxyn1"]
 [ext_resource type="Script" uid="uid://db0cq0exbrfei" path="res://Scripts/LeftPickPosition.gd" id="7_120ol"]
+[ext_resource type="PackedScene" uid="uid://kqd5huaapsv" path="res://61-axepickaxe/pickaxe.fbx" id="7_cfv8d"]
 [ext_resource type="Script" uid="uid://g8ujsn4fx31f" path="res://Scripts/RightHandGrab.gd" id="7_df0il"]
 [ext_resource type="Script" uid="uid://bhlrdf3rnkwuv" path="res://Scripts/RightPickPosition.gd" id="9_cfv8d"]
 
@@ -297,8 +298,8 @@ collision_mask = 256
 [node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/LeftHand/Area3D"]
 shape = SubResource("SphereShape3D_so3qy")
 
-[node name="LeftPick" type="CSGSphere3D" parent="XROrigin3D/LeftHand"]
-radius = 0.1
+[node name="LeftPick" parent="XROrigin3D/LeftHand" instance=ExtResource("7_cfv8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0.1)
 script = ExtResource("7_120ol")
 
 [node name="RightHand" type="XRController3D" parent="XROrigin3D"]
@@ -312,8 +313,8 @@ collision_mask = 512
 [node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/RightHand/Area3D"]
 shape = SubResource("SphereShape3D_5layg")
 
-[node name="RightPick" type="CSGSphere3D" parent="XROrigin3D/RightHand"]
-radius = 0.1
+[node name="RightPick" parent="XROrigin3D/RightHand" instance=ExtResource("7_cfv8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0.1)
 script = ExtResource("9_cfv8d")
 
 [connection signal="button_pressed" from="XROrigin3D/LeftHand" to="XROrigin3D/LeftHand" method="_on_button_pressed"]
