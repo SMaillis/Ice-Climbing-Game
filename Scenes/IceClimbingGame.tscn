@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://btmr05s0k05vr"]
+[gd_scene load_steps=45 format=3 uid="uid://btmr05s0k05vr"]
 
 [ext_resource type="Material" uid="uid://cxvhjkhjhn2jk" path="res://Materials/Snow.tres" id="1_nu2qm"]
 [ext_resource type="Script" uid="uid://1gxlon2ql1bk" path="res://Scripts/XRScript.gd" id="1_vx4eu"]
@@ -6,7 +6,9 @@
 [ext_resource type="Material" uid="uid://bfawe58b3fqma" path="res://Materials/Ice.tres" id="2_vx4eu"]
 [ext_resource type="Material" uid="uid://b4bcsr1x3g05e" path="res://Materials/LatchPoint.tres" id="3_vhgfi"]
 [ext_resource type="Script" uid="uid://c1aqykljntwce" path="res://Scripts/BothHandsLatch.gd" id="5_3v1bd"]
+[ext_resource type="Material" uid="uid://dt3dh66y84uq8" path="res://Materials/SkyBlue.tres" id="6_ljd5i"]
 [ext_resource type="Script" uid="uid://b6vccgp4lw5vh" path="res://Scripts/LeftHandGrab.gd" id="6_qxyn1"]
+[ext_resource type="Material" uid="uid://b2ousehf1g2x3" path="res://Materials/DarkerSkyBlue.tres" id="7_5s6c4"]
 [ext_resource type="Script" uid="uid://db0cq0exbrfei" path="res://Scripts/LeftPickPosition.gd" id="7_120ol"]
 [ext_resource type="Script" uid="uid://dcfhebi3xeb8i" path="res://Scripts/TimeLeft.gd" id="7_aqnor"]
 [ext_resource type="PackedScene" uid="uid://kqd5huaapsv" path="res://61-axepickaxe/pickaxe.fbx" id="7_cfv8d"]
@@ -23,7 +25,7 @@
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_3v1bd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qxyn1"]
-size = Vector3(100, 0.1, 100)
+size = Vector3(15, 0.1, 15)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_df0il"]
 size = Vector3(5, 10, 1)
@@ -31,14 +33,58 @@ size = Vector3(5, 10, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_233t0"]
 size = Vector3(1, 10, 7)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ljd5i"]
+size = Vector3(5, 10, 1)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_120ol"]
 radius = 0.15
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cfv8d"]
 radius = 0.15
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ljd5i"]
-size = Vector3(5, 10, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_5s6c4"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6mare"]
+size = Vector3(100, 0.1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ufnm"]
+size = Vector3(5, 20, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8vhuu"]
+size = Vector3(1, 20, 7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l144q"]
+size = Vector3(1, 20, 7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gke0s"]
+size = Vector3(5, 20, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vhrol"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_81ko2"]
+size = Vector3(7, 1, 48.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cknw0"]
+size = Vector3(7, 1, 13)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oa54w"]
+size = Vector3(7, 1, 25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vhrol"]
+size = Vector3(100, 50, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v7k3f"]
+size = Vector3(100, 50, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rhncu"]
+size = Vector3(1, 50, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7d6ou"]
+size = Vector3(1, 50, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cxhgg"]
+size = Vector3(80, 1, 100)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_so3qy"]
 radius = 0.1
@@ -53,20 +99,41 @@ script = ExtResource("1_vx4eu")
 environment = SubResource("Environment_dutc3")
 camera_attributes = SubResource("CameraAttributesPractical_3v1bd")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 10, 3)
-
 [node name="WorldContainer" type="Node3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
 script = ExtResource("2_cfv8d")
 
-[node name="Ground" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
+[node name="TutorialLight" type="DirectionalLight3D" parent="WorldEnvironment/WorldContainer"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 8, 3)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/Ground"]
+[node name="Lights" type="Node3D" parent="WorldEnvironment/WorldContainer"]
+
+[node name="WorldLight" type="DirectionalLight3D" parent="WorldEnvironment/WorldContainer/Lights"]
+transform = Transform3D(1, 0, 0, 0, 0.504663, 0.863316, 0, -0.863316, 0.504663, 0, 30, 0)
+
+[node name="WorldLight2" type="DirectionalLight3D" parent="WorldEnvironment/WorldContainer/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
+
+[node name="WorldLight3" type="DirectionalLight3D" parent="WorldEnvironment/WorldContainer/Lights"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 30, 0)
+
+[node name="WorldLight4" type="DirectionalLight3D" parent="WorldEnvironment/WorldContainer/Lights"]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 30, 0)
+
+[node name="WorldLight5" type="DirectionalLight3D" parent="WorldEnvironment/WorldContainer/Lights"]
+transform = Transform3D(1.19249e-08, 0, 1, 0, 1, 0, -1, 0, 1.19249e-08, 0, 30, 0)
+
+[node name="WorldLight6" type="DirectionalLight3D" parent="WorldEnvironment/WorldContainer/Lights"]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0, 30, 0)
+
+[node name="TutorialGround" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialGround"]
 shape = SubResource("BoxShape3D_qxyn1")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/Ground"]
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/TutorialGround"]
 material_override = ExtResource("1_nu2qm")
-size = Vector3(100, 0.1, 100)
+size = Vector3(15, 0.1, 15)
 
 [node name="TutorialMountain" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.05, -1)
@@ -88,224 +155,6 @@ shape = SubResource("BoxShape3D_233t0")
 material_override = ExtResource("2_vx4eu")
 size = Vector3(1, 10, 7)
 
-[node name="LatchPoints" type="Node3D" parent="WorldEnvironment/WorldContainer"]
-
-[node name="L1" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L1"]
-shape = SubResource("SphereShape3D_120ol")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L1"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L2" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.5, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L2"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L2"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L3" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L3"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L3"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L4" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2.5, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L4"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L4"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L5" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L5"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L5"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L6" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 3.5, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L6"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L6"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L7" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L7"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L7"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L8" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 4.5, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L8"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L8"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L9" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L9"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L9"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L10" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 5.5, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L10"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L10"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L11" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L11"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L11"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L12" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 6.5, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L12"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L12"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L13" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 7, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L13"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L13"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L14" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 7.5, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L14"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L14"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L15" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 8, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L15"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L15"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L16" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 8.5, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L16"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L16"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L17" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 9, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L17"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L17"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
-[node name="L18" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/LatchPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 9.5, -0.5)
-collision_layer = 769
-collision_mask = 769
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L18"]
-shape = SubResource("SphereShape3D_cfv8d")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/LatchPoints/L18"]
-material_override = ExtResource("3_vhgfi")
-radius = 0.1
-
 [node name="RightWallTutorial" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 5.05, 2)
 
@@ -323,7 +172,408 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.05, 5)
 shape = SubResource("BoxShape3D_ljd5i")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/BackWallTutorial"]
+material_override = ExtResource("2_vx4eu")
 size = Vector3(5, 10, 1)
+
+[node name="TutorialLatchPoints" type="Node3D" parent="WorldEnvironment/WorldContainer"]
+
+[node name="L1" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L1"]
+shape = SubResource("SphereShape3D_120ol")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L1"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L2" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.5, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L2"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L2"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L3" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L3"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L3"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L4" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2.5, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L4"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L4"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L5" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L5"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L5"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L6" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 3.5, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L6"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L6"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L7" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L7"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L7"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L8" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 4.5, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L8"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L8"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L9" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L9"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L9"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L10" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 5.5, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L10"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L10"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L11" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L11"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L11"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L12" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 6.5, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L12"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L12"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L13" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 7, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L13"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L13"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L14" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 7.5, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L14"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L14"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L15" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 8, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L15"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L15"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L16" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 8.5, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L16"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L16"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L17" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 9, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L17"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L17"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="L18" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 9.5, -0.5)
+collision_layer = 769
+collision_mask = 769
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L18"]
+shape = SubResource("SphereShape3D_cfv8d")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="WorldEnvironment/WorldContainer/TutorialLatchPoints/L18"]
+material_override = ExtResource("3_vhgfi")
+radius = 0.1
+
+[node name="TutorialLid" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.55, 2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/TutorialLid"]
+shape = SubResource("BoxShape3D_5s6c4")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/TutorialLid"]
+material_override = ExtResource("2_vx4eu")
+size = Vector3(5, 1, 5)
+
+[node name="FinalGround" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.9, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/FinalGround"]
+material_override = ExtResource("1_nu2qm")
+size = Vector3(100, 0.1, 100)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/FinalGround"]
+shape = SubResource("BoxShape3D_6mare")
+
+[node name="FinalLight" type="DirectionalLight3D" parent="WorldEnvironment/WorldContainer"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 8, 22)
+
+[node name="FinalMountain" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 19)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/FinalMountain"]
+shape = SubResource("BoxShape3D_8ufnm")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/FinalMountain"]
+material_override = ExtResource("2_vx4eu")
+size = Vector3(5, 20, 1)
+
+[node name="FinalLeftWall" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, 22)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/FinalLeftWall"]
+shape = SubResource("BoxShape3D_8vhuu")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/FinalLeftWall"]
+material_override = ExtResource("2_vx4eu")
+size = Vector3(1, 20, 7)
+
+[node name="FinalRightWall" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, 22)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/FinalRightWall"]
+material_override = ExtResource("2_vx4eu")
+size = Vector3(1, 20, 7)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/FinalRightWall"]
+shape = SubResource("BoxShape3D_l144q")
+
+[node name="FinalBackWall" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 25)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/FinalBackWall"]
+shape = SubResource("BoxShape3D_gke0s")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/FinalBackWall"]
+material_override = ExtResource("2_vx4eu")
+size = Vector3(5, 20, 1)
+
+[node name="FinalLid" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.55, 22)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/FinalLid"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/FinalLid"]
+material_override = ExtResource("2_vx4eu")
+size = Vector3(5, 1, 5)
+
+[node name="FinalLatchPoints" type="Node3D" parent="WorldEnvironment/WorldContainer"]
+
+[node name="RightSide" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 23, 9.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/RightSide"]
+shape = SubResource("CylinderShape3D_vhrol")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="WorldEnvironment/WorldContainer/RightSide"]
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("6_ljd5i")
+radius = 5.0
+height = 100.0
+sides = 20
+
+[node name="LeftSide" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -23, 9.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/LeftSide"]
+shape = SubResource("CylinderShape3D_vhrol")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="WorldEnvironment/WorldContainer/LeftSide"]
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("6_ljd5i")
+radius = 5.0
+height = 100.0
+sides = 20
+
+[node name="FrontRoad" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.55, -25.75)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/FrontRoad"]
+shape = SubResource("BoxShape3D_81ko2")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/FrontRoad"]
+material_override = ExtResource("2_vx4eu")
+size = Vector3(7, 1, 48.5)
+
+[node name="MidRoad" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.55, 12)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/MidRoad"]
+material_override = ExtResource("2_vx4eu")
+size = Vector3(7, 1, 13)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/MidRoad"]
+shape = SubResource("BoxShape3D_cknw0")
+
+[node name="BackRoad" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.55, 38)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/BackRoad"]
+material_override = ExtResource("2_vx4eu")
+size = Vector3(7, 1, 25)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/BackRoad"]
+shape = SubResource("BoxShape3D_oa54w")
+
+[node name="Sky" type="Node3D" parent="WorldEnvironment/WorldContainer"]
+
+[node name="FrontSky" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/Sky"]
+transform = Transform3D(1, -8.74228e-08, 8.74228e-08, 8.74228e-08, 1, 8.74228e-08, -8.74228e-08, -8.74228e-08, 1, 0, 34.05, -50.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/Sky/FrontSky"]
+shape = SubResource("BoxShape3D_vhrol")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/Sky/FrontSky"]
+material_override = ExtResource("7_5s6c4")
+size = Vector3(100, 50, 1)
+
+[node name="BackSky" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/Sky"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34.05, 50.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/Sky/BackSky"]
+shape = SubResource("BoxShape3D_v7k3f")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/Sky/BackSky"]
+material_override = ExtResource("6_ljd5i")
+size = Vector3(100, 50, 1)
+
+[node name="LeftSky" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/Sky"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 34.05, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/Sky/LeftSky"]
+shape = SubResource("BoxShape3D_rhncu")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/Sky/LeftSky"]
+material_override = ExtResource("6_ljd5i")
+size = Vector3(1, 50, 100)
+
+[node name="RightSky" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/Sky"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 34.05, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/Sky/RightSky"]
+material_override = ExtResource("6_ljd5i")
+size = Vector3(1, 50, 100)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/Sky/RightSky"]
+shape = SubResource("BoxShape3D_7d6ou")
+
+[node name="TopSky" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/Sky"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 58.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/Sky/TopSky"]
+shape = SubResource("BoxShape3D_cxhgg")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/Sky/TopSky"]
+material_override = ExtResource("6_ljd5i")
+size = Vector3(80, 1, 100)
 
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
 script = ExtResource("5_3v1bd")

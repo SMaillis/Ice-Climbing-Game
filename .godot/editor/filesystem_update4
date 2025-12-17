@@ -20,3 +20,5 @@ res://Scenes/TimeLeft.gd
 res://Scripts/XRScript.gd
 res://Scripts/RightGripTimer.gd
 res://Scripts/TimeLeft.gd
+res://Materials/SkyBlue.tres
+res://Materials/DarkerSkyBlue.tres
