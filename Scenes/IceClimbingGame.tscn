@@ -1,15 +1,19 @@
-[gd_scene load_steps=19 format=3 uid="uid://btmr05s0k05vr"]
+[gd_scene load_steps=23 format=3 uid="uid://btmr05s0k05vr"]
 
 [ext_resource type="Material" uid="uid://cxvhjkhjhn2jk" path="res://Materials/Snow.tres" id="1_nu2qm"]
 [ext_resource type="Script" uid="uid://1gxlon2ql1bk" path="res://Scripts/XRScript.gd" id="1_vx4eu"]
+[ext_resource type="Script" uid="uid://ccp7ceyg81sjr" path="res://Scripts/Height.gd" id="2_cfv8d"]
 [ext_resource type="Material" uid="uid://bfawe58b3fqma" path="res://Materials/Ice.tres" id="2_vx4eu"]
 [ext_resource type="Material" uid="uid://b4bcsr1x3g05e" path="res://Materials/LatchPoint.tres" id="3_vhgfi"]
 [ext_resource type="Script" uid="uid://c1aqykljntwce" path="res://Scripts/BothHandsLatch.gd" id="5_3v1bd"]
 [ext_resource type="Script" uid="uid://b6vccgp4lw5vh" path="res://Scripts/LeftHandGrab.gd" id="6_qxyn1"]
 [ext_resource type="Script" uid="uid://db0cq0exbrfei" path="res://Scripts/LeftPickPosition.gd" id="7_120ol"]
+[ext_resource type="Script" uid="uid://dcfhebi3xeb8i" path="res://Scenes/TimeLeft.gd" id="7_aqnor"]
 [ext_resource type="PackedScene" uid="uid://kqd5huaapsv" path="res://61-axepickaxe/pickaxe.fbx" id="7_cfv8d"]
 [ext_resource type="Script" uid="uid://g8ujsn4fx31f" path="res://Scripts/RightHandGrab.gd" id="7_df0il"]
+[ext_resource type="PackedScene" uid="uid://c8y3281wwurf0" path="res://Scenes/HUD.tscn" id="8_5layg"]
 [ext_resource type="Script" uid="uid://bhlrdf3rnkwuv" path="res://Scripts/RightPickPosition.gd" id="9_cfv8d"]
+[ext_resource type="Script" uid="uid://dyn5aki354jjc" path="res://Scenes/HudDisplay.gd" id="12_5layg"]
 
 [sub_resource type="Environment" id="Environment_dutc3"]
 
@@ -44,6 +48,7 @@ camera_attributes = SubResource("CameraAttributesPractical_3v1bd")
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 10, 5)
 
 [node name="WorldContainer" type="Node3D" parent="WorldEnvironment"]
+script = ExtResource("2_cfv8d")
 
 [node name="Ground" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
 
@@ -302,6 +307,17 @@ shape = SubResource("SphereShape3D_so3qy")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0.1)
 script = ExtResource("7_120ol")
 
+[node name="Label3D" type="Label3D" parent="XROrigin3D/LeftHand/LeftPick"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -0.1)
+no_depth_test = true
+font_size = 8
+outline_size = 3
+script = ExtResource("7_aqnor")
+
+[node name="TimeLeft" type="Timer" parent="XROrigin3D/LeftHand/LeftPick/Label3D"]
+wait_time = 180.0
+autostart = true
+
 [node name="RightHand" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
 script = ExtResource("7_df0il")
@@ -316,6 +332,18 @@ shape = SubResource("SphereShape3D_5layg")
 [node name="RightPick" parent="XROrigin3D/RightHand" instance=ExtResource("7_cfv8d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0.1)
 script = ExtResource("9_cfv8d")
+
+[node name="OpenXRCompositionLayerQuad" type="OpenXRCompositionLayerQuad" parent="XROrigin3D" node_paths=PackedStringArray("layer_viewport")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+visible = false
+layer_viewport = NodePath("../../SubViewport")
+script = ExtResource("12_5layg")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="Hud" parent="SubViewport" instance=ExtResource("8_5layg")]
 
 [connection signal="button_pressed" from="XROrigin3D/LeftHand" to="XROrigin3D/LeftHand" method="_on_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/LeftHand" to="XROrigin3D" method="_on_left_hand_button_released"]

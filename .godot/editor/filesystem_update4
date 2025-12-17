@@ -12,3 +12,8 @@ res://Scripts/RightHandGrab.gd
 res://Scripts/LeftPickPosition.gd
 res://Scripts/RightPickPosition.gd
 res://Scripts/BothHandsLatch.gd
+res://Scripts/Height.gd
+res://Scripts/HudDisplay.gd
+res://Scenes/HUD.tscn
+res://Scenes/HudDisplay.gd
+res://Scenes/TimeLeft.gd

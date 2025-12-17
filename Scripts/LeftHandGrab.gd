@@ -16,19 +16,8 @@ func _process(delta):
 			grabbed_object.get_parent().get_parent().global_position.x += global_position.x - grab_position.x
 			grabbed_object.get_parent().get_parent().global_position.y += global_position.y - grab_position.y
 		elif $"../RightHand".grabbed_object.global_position.y < grabbed_object.global_position.y:
-			if not $"../RightHand".global_position.y - $"../RightHand".grab_position.y > 0:
-				#if left hand is above and pulling down to go up mountain then prioritize it
-				#also make sure the right hand isn't trying to go down more than left is up
-				grabbed_object.get_parent().get_parent().global_position.x += global_position.x - grab_position.x
-				grabbed_object.get_parent().get_parent().global_position.y += global_position.y - grab_position.y
-		else:
-			#if left is trying to go down more than right is up then go down
-			if (abs($"../RightHand".global_position.y - $"../RightHand".grab_position.y) < 
-				abs(global_position.y - grab_position.y)):
-				grabbed_object.get_parent().get_parent().global_position.x += global_position.x - grab_position.x
-				grabbed_object.get_parent().get_parent().global_position.y += global_position.y - grab_position.y
-			
-			
+			grabbed_object.get_parent().get_parent().global_position.x += global_position.x - grab_position.x
+			grabbed_object.get_parent().get_parent().global_position.y += global_position.y - grab_position.y
 		grab_position = global_position
 		
 
