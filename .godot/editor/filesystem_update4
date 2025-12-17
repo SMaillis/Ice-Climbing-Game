@@ -17,3 +17,6 @@ res://Scripts/HudDisplay.gd
 res://Scenes/HUD.tscn
 res://Scenes/HudDisplay.gd
 res://Scenes/TimeLeft.gd
+res://Scripts/XRScript.gd
+res://Scripts/RightGripTimer.gd
+res://Scripts/TimeLeft.gd

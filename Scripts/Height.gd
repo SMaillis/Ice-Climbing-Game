@@ -8,6 +8,6 @@ func _process(delta: float) -> void:
 	
 	if cur_height >= max_height:
 		max_height = cur_height
-		print("Score: ", max_height)
+		#print("Score: ", max_height)
 			
 	

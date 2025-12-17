@@ -1,6 +1,5 @@
 extends Node3D
 
-
 func _process(delta):
 	if get_parent().grabbed_object:
 		global_position = get_parent().grabbed_object.global_position

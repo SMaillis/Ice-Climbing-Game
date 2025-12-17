@@ -6,6 +6,7 @@ var grabbed_object = null
 var grab_position = null
 var instance = null
 var grab_pressed = false
+var audio_playing = false
 
 func _process(delta):
 	if grabbed_object:
@@ -19,6 +20,7 @@ func _process(delta):
 			grabbed_object.get_parent().get_parent().global_position.x += global_position.x - grab_position.x
 			grabbed_object.get_parent().get_parent().global_position.y += global_position.y - grab_position.y
 		grab_position = global_position
+		
 		
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
@@ -52,6 +54,8 @@ func _on_button_pressed(name: String) -> void:
 				instance = null
 			grabbed_object = collided_object
 			grab_position = global_position
+			$"LatchSound".play()
+			$"LeftPick/Label3D/LeftGripTimer".start()
 
 func _on_button_released(name: String) -> void:
 	if name == "grip_click":
@@ -62,8 +66,32 @@ func _on_button_released(name: String) -> void:
 				grabbed_object.get_parent().get_parent().global_position.y = 0
 			grabbed_object = null
 			grab_position = null
+			
+			$"ReleaseSound".play()
+			$"ReleaseSound/PlayTimer".start()
+			audio_playing = true
+			
 		#if we release an object but our cursor is still inside its area
 		#then re-instantiate the bubble
 		if collided_object:
 			instance = YellowBubble.instantiate()
 			collided_object.add_child(instance)
+
+
+func _on_play_timer_timeout() -> void:
+	if audio_playing:
+		$"ReleaseSound".stop()
+		audio_playing = false
+
+
+func _on_left_grip_timer_timeout() -> void:
+	if grabbed_object:
+		if (not $"../RightHand".grabbed_object):
+			grabbed_object.get_parent().get_parent().global_position.x = 0
+			grabbed_object.get_parent().get_parent().global_position.y = 0
+		grabbed_object = null
+		grab_position = null
+		
+		$"ReleaseSound".play(3.5)
+		$"ReleaseSound/PlayTimer".start()
+		audio_playing = true
