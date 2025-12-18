@@ -11,6 +11,7 @@ var audio_playing = false
 var saber_on = true
 var result_name = "null"
 var result = null
+var tutorial = false
 
 func _process(delta):
 	if grabbed_object:
@@ -100,6 +101,8 @@ func _on_button_pressed(name: String) -> void:
 			$"../RightHand/RightPick/Label3D".tutorial = true
 			$"LeftPick/Label3D".titlescreen = false
 			$"../RightHand/RightPick/Label3D".titlescreen = false
+			tutorial = true
+			$"../RightHand".tutorial = true
 		
 		elif result_name == "StartGameButton":
 			result.collider.get_parent().get_parent().global_position.x = 0.0
@@ -116,6 +119,8 @@ func _on_button_pressed(name: String) -> void:
 			$"../RightHand/RightPick/Label3D".game = true
 			$"LeftPick/Label3D".titlescreen = false
 			$"../RightHand/RightPick/Label3D".titlescreen = false
+			tutorial = false
+			$"../RightHand".tutorial = false
 
 func _on_button_released(name: String) -> void:
 	if name == "grip_click":
@@ -123,7 +128,10 @@ func _on_button_released(name: String) -> void:
 		if grabbed_object:
 			if (not $"../RightHand".grabbed_object):
 				grabbed_object.get_parent().get_parent().global_position.x = 0
-				grabbed_object.get_parent().get_parent().global_position.y = 0
+				if tutorial == true:
+					grabbed_object.get_parent().get_parent().global_position.y = 0
+				else:
+					grabbed_object.get_parent().get_parent().global_position.y = 9.9
 				$"LeftPick/Label3D".fall = true
 			grabbed_object = null
 			grab_position = null
@@ -150,7 +158,10 @@ func _on_left_grip_timer_timeout() -> void:
 	if grabbed_object:
 		if (not $"../RightHand".grabbed_object):
 			grabbed_object.get_parent().get_parent().global_position.x = 0
-			grabbed_object.get_parent().get_parent().global_position.y = 0
+			if tutorial == true:
+				grabbed_object.get_parent().get_parent().global_position.y = 0
+			else:
+				grabbed_object.get_parent().get_parent().global_position.y = 9.9
 		grabbed_object = null
 		grab_position = null
 		
@@ -173,3 +184,7 @@ func _on_time_left_timeout() -> void:
 
 func _on_failsafe_timer_timeout() -> void:
 	saber_on = true
+	$"LeftPick/Label3D/TimeLeft".stop()
+	if grabbed_object:
+		grabbed_object = null
+		grab_position = null

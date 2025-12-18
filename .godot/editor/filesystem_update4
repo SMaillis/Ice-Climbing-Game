@@ -27,3 +27,5 @@ res://Materials/Green.tres
 res://Materials/Red.tres
 res://Scenes/RightRaycast.gd
 res://Materials/Blue.tres
+res://Scripts/HeightScore.gd
+res://Scripts/TimeScore.gd

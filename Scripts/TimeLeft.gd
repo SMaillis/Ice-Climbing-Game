@@ -40,6 +40,7 @@ func _process(delta: float) -> void:
 
 func _on_tutorial_timer_timeout() -> void:
 	tutorial = false
+	fall = false
 	text = "Good Luck!"
 	$"TeleportTimer".start()
 	print("tutorial left")
@@ -47,6 +48,8 @@ func _on_tutorial_timer_timeout() -> void:
 
 func _on_failsafe_timer_timeout() -> void:
 	titlescreen = true
+	tutorial = false
+	game = false
 	print("failsafe left")
 
 

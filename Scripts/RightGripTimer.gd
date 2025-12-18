@@ -23,14 +23,18 @@ func _process(delta: float) -> void:
 			text = "Press the side grip buttons to grab the wall"
 	
 	elif game:
-		pass
-		
+		if get_parent().get_parent().grabbed_object:
+			text = "Grip Time: %.1f" % $RightGripTimer.time_left
+		else:
+			text = ""
+	
 	elif titlescreen:
 		text = ""
 	
 
 func _on_tutorial_timer_timeout() -> void:
 	tutorial = false
+	fall = false
 	text = "Have Fun!"
 	print("tutorial right")
 	
@@ -38,6 +42,8 @@ func _on_tutorial_timer_timeout() -> void:
 
 func _on_failsafe_timer_timeout() -> void:
 	titlescreen = true
+	tutorial = false
+	game = false
 	print("failsafe right")
 
 

@@ -11,6 +11,7 @@ var saber_on = true
 @export var raycast_length = 10.0
 var result_name = "null"
 var result = null
+var tutorial = false
 
 func _process(delta):
 	if grabbed_object:
@@ -97,6 +98,8 @@ func _on_button_pressed(name: String) -> void:
 			$"RightPick/Label3D".tutorial = true
 			$"../LeftHand/LeftPick/Label3D".titlescreen = false
 			$"RightPick/Label3D".titlescreen = false
+			tutorial = true
+			$"../LeftHand".tutorial = true
 		
 		elif result_name == "StartGameButton":
 			result.collider.get_parent().get_parent().global_position.x = 0.0
@@ -113,6 +116,8 @@ func _on_button_pressed(name: String) -> void:
 			$"RightPick/Label3D".game = true
 			$"../LeftHand/LeftPick/Label3D".titlescreen = false
 			$"RightPick/Label3D".titlescreen = false
+			tutorial = false
+			$"../LeftHand".tutorial = false
 			
 
 func _on_button_released(name: String) -> void:
@@ -121,7 +126,10 @@ func _on_button_released(name: String) -> void:
 		if grabbed_object:
 			if (not $"../LeftHand".grabbed_object):
 				grabbed_object.get_parent().get_parent().global_position.x = 0
-				grabbed_object.get_parent().get_parent().global_position.y = 0
+				if tutorial == true:
+					grabbed_object.get_parent().get_parent().global_position.y = 0
+				else:
+					grabbed_object.get_parent().get_parent().global_position.y = 9.9
 				$"RightPick/Label3D".fall = true
 			grabbed_object = null
 			grab_position = null
@@ -147,7 +155,11 @@ func _on_right_grip_timer_timeout() -> void:
 	if grabbed_object:
 		if (not $"../LeftHand".grabbed_object):
 			grabbed_object.get_parent().get_parent().global_position.x = 0
-			grabbed_object.get_parent().get_parent().global_position.y = 0
+			if tutorial == true:
+				grabbed_object.get_parent().get_parent().global_position.y = 0
+			else:
+				grabbed_object.get_parent().get_parent().global_position.y = 9.9
+	
 		grabbed_object = null
 		grab_position = null
 		
@@ -170,3 +182,6 @@ func _on_time_left_timeout() -> void:
 
 func _on_failsafe_timer_timeout() -> void:
 	saber_on = true
+	if grabbed_object:
+		grabbed_object = null
+		grab_position = null
