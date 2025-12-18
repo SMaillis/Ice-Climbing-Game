@@ -469,7 +469,6 @@ shape = SubResource("BoxShape3D_l144q")
 
 [node name="FinalBackWall" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 25)
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/FinalBackWall"]
 shape = SubResource("BoxShape3D_gke0s")
@@ -480,7 +479,6 @@ size = Vector3(5, 20, 1)
 
 [node name="FinalLid" type="StaticBody3D" parent="WorldEnvironment/WorldContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.55, 22)
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/FinalLid"]
 shape = SubResource("BoxShape3D_120a6")
