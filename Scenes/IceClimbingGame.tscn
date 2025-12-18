@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://btmr05s0k05vr"]
+[gd_scene load_steps=53 format=3 uid="uid://btmr05s0k05vr"]
 
 [ext_resource type="Material" uid="uid://cxvhjkhjhn2jk" path="res://Materials/Snow.tres" id="1_nu2qm"]
 [ext_resource type="Script" uid="uid://1gxlon2ql1bk" path="res://Scripts/XRScript.gd" id="1_vx4eu"]
@@ -13,12 +13,15 @@
 [ext_resource type="Script" uid="uid://dcfhebi3xeb8i" path="res://Scripts/TimeLeft.gd" id="7_aqnor"]
 [ext_resource type="PackedScene" uid="uid://kqd5huaapsv" path="res://61-axepickaxe/pickaxe.fbx" id="7_cfv8d"]
 [ext_resource type="Script" uid="uid://g8ujsn4fx31f" path="res://Scripts/RightHandGrab.gd" id="7_df0il"]
-[ext_resource type="PackedScene" uid="uid://c8y3281wwurf0" path="res://Scenes/HUD.tscn" id="8_5layg"]
+[ext_resource type="Material" uid="uid://c6rsumoqqaa4i" path="res://Materials/Red.tres" id="8_81ko2"]
 [ext_resource type="Script" uid="uid://bhlrdf3rnkwuv" path="res://Scripts/RightPickPosition.gd" id="9_cfv8d"]
-[ext_resource type="Script" uid="uid://dyn5aki354jjc" path="res://Scripts/HudDisplay.gd" id="12_5layg"]
+[ext_resource type="Material" uid="uid://bff764s3em3mt" path="res://Materials/Blue.tres" id="9_v7k3f"]
 [ext_resource type="AudioStream" uid="uid://wpqscseorkcg" path="res://Audio/sound-of-ice-cracking-426894.mp3" id="12_wce76"]
 [ext_resource type="AudioStream" uid="uid://c4bd2sil4mwq" path="res://Audio/pickaxe-blow-333695.mp3" id="13_0mr8u"]
+[ext_resource type="Material" uid="uid://hk4ud74kxvtn" path="res://Materials/Green.tres" id="15_81ko2"]
 [ext_resource type="Script" uid="uid://fl823r6o57i0" path="res://Scripts/RightGripTimer.gd" id="15_233t0"]
+[ext_resource type="Script" uid="uid://bwu7vd4iik7q3" path="res://Scripts/LeftRaycast.gd" id="15_vhrol"]
+[ext_resource type="Script" uid="uid://rs2oqi26vp0l" path="res://Scenes/RightRaycast.gd" id="21_v7k3f"]
 
 [sub_resource type="Environment" id="Environment_dutc3"]
 
@@ -86,11 +89,24 @@ size = Vector3(1, 50, 100)
 [sub_resource type="BoxShape3D" id="BoxShape3D_cxhgg"]
 size = Vector3(80, 1, 100)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_iq2uw"]
+size = Vector3(1, 0.5, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xg1cw"]
+size = Vector3(1, 0.5, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_44bo4"]
+size = Vector3(5, 3, 0.1)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_so3qy"]
 radius = 0.1
 
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_vhrol"]
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_5layg"]
 radius = 0.1
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_xg1cw"]
 
 [node name="IceClimbingGame" type="Node3D"]
 script = ExtResource("1_vx4eu")
@@ -575,6 +591,57 @@ shape = SubResource("BoxShape3D_cxhgg")
 material_override = ExtResource("6_ljd5i")
 size = Vector3(80, 1, 100)
 
+[node name="StartMenu" type="Node3D" parent="WorldEnvironment/WorldContainer"]
+
+[node name="StartTutorialButton" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/StartMenu"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 11, -5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/StartMenu/StartTutorialButton"]
+shape = SubResource("BoxShape3D_iq2uw")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/StartMenu/StartTutorialButton"]
+material_override = ExtResource("8_81ko2")
+size = Vector3(1, 0.5, 0.1)
+
+[node name="TutorialLabel" type="Label3D" parent="WorldEnvironment/WorldContainer/StartMenu/StartTutorialButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+text = "Start Tutorial"
+font_size = 24
+
+[node name="StartGameButton" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/StartMenu"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 11, -5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/StartMenu/StartGameButton"]
+shape = SubResource("BoxShape3D_xg1cw")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/StartMenu/StartGameButton"]
+material_override = ExtResource("9_v7k3f")
+size = Vector3(1, 0.5, 0.1)
+
+[node name="StartGameLabel" type="Label3D" parent="WorldEnvironment/WorldContainer/StartMenu/StartGameButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+text = "Start Climbing"
+font_size = 24
+
+[node name="MenuBackground" type="StaticBody3D" parent="WorldEnvironment/WorldContainer/StartMenu"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5, -5.1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/WorldContainer/StartMenu/MenuBackground"]
+shape = SubResource("BoxShape3D_44bo4")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldEnvironment/WorldContainer/StartMenu/MenuBackground"]
+material_override = ExtResource("3_vhgfi")
+size = Vector3(5, 3, 0.1)
+
+[node name="SummitScaler" type="Label3D" parent="WorldEnvironment/WorldContainer/StartMenu"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.5, -5)
+text = "Summit Scaler"
+font_size = 64
+
+[node name="FailsafeTimer" type="Timer" parent="WorldEnvironment/WorldContainer"]
+wait_time = 0.1
+one_shot = true
+
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
 script = ExtResource("5_3v1bd")
 
@@ -597,17 +664,20 @@ script = ExtResource("7_120ol")
 
 [node name="Label3D" type="Label3D" parent="XROrigin3D/LeftHand/LeftPick"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -0.1)
-no_depth_test = true
 font_size = 8
 outline_size = 3
 script = ExtResource("7_aqnor")
 
 [node name="TimeLeft" type="Timer" parent="XROrigin3D/LeftHand/LeftPick/Label3D"]
 wait_time = 180.0
-autostart = true
+one_shot = true
 
 [node name="LeftGripTimer" type="Timer" parent="XROrigin3D/LeftHand/LeftPick/Label3D"]
 wait_time = 10.0
+
+[node name="TeleportTimer" type="Timer" parent="XROrigin3D/LeftHand/LeftPick/Label3D"]
+wait_time = 5.0
+one_shot = true
 
 [node name="LatchSound" type="AudioStreamPlayer3D" parent="XROrigin3D/LeftHand"]
 stream = ExtResource("13_0mr8u")
@@ -617,6 +687,11 @@ stream = ExtResource("12_wce76")
 
 [node name="PlayTimer" type="Timer" parent="XROrigin3D/LeftHand/ReleaseSound"]
 wait_time = 0.5
+
+[node name="LineRendererLeft" type="MeshInstance3D" parent="XROrigin3D/LeftHand"]
+material_override = ExtResource("15_81ko2")
+mesh = SubResource("ImmediateMesh_vhrol")
+script = ExtResource("15_vhrol")
 
 [node name="RightHand" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
@@ -650,18 +725,20 @@ stream = ExtResource("12_wce76")
 
 [node name="PlayTimer" type="Timer" parent="XROrigin3D/RightHand/ReleaseSound"]
 
-[node name="OpenXRCompositionLayerQuad" type="OpenXRCompositionLayerQuad" parent="XROrigin3D" node_paths=PackedStringArray("layer_viewport")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
-visible = false
-layer_viewport = NodePath("../../SubViewport")
-script = ExtResource("12_5layg")
+[node name="LineRendererRight" type="MeshInstance3D" parent="XROrigin3D/RightHand"]
+material_override = ExtResource("15_81ko2")
+mesh = SubResource("ImmediateMesh_xg1cw")
+script = ExtResource("21_v7k3f")
 
-[node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
-render_target_update_mode = 4
+[node name="TutorialTimer" type="Timer" parent="XROrigin3D"]
+wait_time = 35.0
+one_shot = true
 
-[node name="Hud" parent="SubViewport" instance=ExtResource("8_5layg")]
-
+[connection signal="timeout" from="WorldEnvironment/WorldContainer/FailsafeTimer" to="WorldEnvironment/WorldContainer" method="_on_failsafe_timer_timeout"]
+[connection signal="timeout" from="WorldEnvironment/WorldContainer/FailsafeTimer" to="XROrigin3D/LeftHand" method="_on_failsafe_timer_timeout"]
+[connection signal="timeout" from="WorldEnvironment/WorldContainer/FailsafeTimer" to="XROrigin3D/LeftHand/LeftPick/Label3D" method="_on_failsafe_timer_timeout"]
+[connection signal="timeout" from="WorldEnvironment/WorldContainer/FailsafeTimer" to="XROrigin3D/RightHand" method="_on_failsafe_timer_timeout"]
+[connection signal="timeout" from="WorldEnvironment/WorldContainer/FailsafeTimer" to="XROrigin3D/RightHand/RightPick/Label3D" method="_on_failsafe_timer_timeout"]
 [connection signal="button_pressed" from="XROrigin3D/LeftHand" to="XROrigin3D/LeftHand" method="_on_button_pressed"]
 [connection signal="button_pressed" from="XROrigin3D/LeftHand" to="XROrigin3D/LeftHand/LeftPick" method="_on_left_hand_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/LeftHand" to="XROrigin3D" method="_on_left_hand_button_released"]
@@ -669,7 +746,15 @@ render_target_update_mode = 4
 [connection signal="button_released" from="XROrigin3D/LeftHand" to="XROrigin3D/LeftHand/LeftPick" method="_on_left_hand_button_released"]
 [connection signal="body_entered" from="XROrigin3D/LeftHand/Area3D" to="XROrigin3D/LeftHand" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="XROrigin3D/LeftHand/Area3D" to="XROrigin3D/LeftHand" method="_on_area_3d_body_exited"]
+[connection signal="timeout" from="XROrigin3D/LeftHand/LeftPick/Label3D/TimeLeft" to="WorldEnvironment/WorldContainer" method="_on_time_left_timeout"]
+[connection signal="timeout" from="XROrigin3D/LeftHand/LeftPick/Label3D/TimeLeft" to="XROrigin3D/LeftHand" method="_on_time_left_timeout"]
+[connection signal="timeout" from="XROrigin3D/LeftHand/LeftPick/Label3D/TimeLeft" to="XROrigin3D/LeftHand/LeftPick/Label3D" method="_on_time_left_timeout"]
+[connection signal="timeout" from="XROrigin3D/LeftHand/LeftPick/Label3D/TimeLeft" to="XROrigin3D/RightHand" method="_on_time_left_timeout"]
+[connection signal="timeout" from="XROrigin3D/LeftHand/LeftPick/Label3D/TimeLeft" to="XROrigin3D/RightHand/RightPick/Label3D" method="_on_time_left_timeout"]
 [connection signal="timeout" from="XROrigin3D/LeftHand/LeftPick/Label3D/LeftGripTimer" to="XROrigin3D/LeftHand" method="_on_left_grip_timer_timeout"]
+[connection signal="timeout" from="XROrigin3D/LeftHand/LeftPick/Label3D/TeleportTimer" to="WorldEnvironment/WorldContainer" method="_on_teleport_timer_timeout"]
+[connection signal="timeout" from="XROrigin3D/LeftHand/LeftPick/Label3D/TeleportTimer" to="XROrigin3D/LeftHand" method="_on_teleport_timer_timeout"]
+[connection signal="timeout" from="XROrigin3D/LeftHand/LeftPick/Label3D/TeleportTimer" to="XROrigin3D/RightHand" method="_on_teleport_timer_timeout"]
 [connection signal="timeout" from="XROrigin3D/LeftHand/ReleaseSound/PlayTimer" to="XROrigin3D/LeftHand" method="_on_play_timer_timeout"]
 [connection signal="button_pressed" from="XROrigin3D/RightHand" to="XROrigin3D/RightHand" method="_on_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/RightHand" to="XROrigin3D" method="_on_right_hand_button_released"]
@@ -678,3 +763,5 @@ render_target_update_mode = 4
 [connection signal="body_exited" from="XROrigin3D/RightHand/Area3D" to="XROrigin3D/RightHand" method="_on_area_3d_body_exited"]
 [connection signal="timeout" from="XROrigin3D/RightHand/RightPick/Label3D/RightGripTimer" to="XROrigin3D/RightHand" method="_on_right_grip_timer_timeout"]
 [connection signal="timeout" from="XROrigin3D/RightHand/ReleaseSound/PlayTimer" to="XROrigin3D/RightHand" method="_on_play_timer_timeout"]
+[connection signal="timeout" from="XROrigin3D/TutorialTimer" to="XROrigin3D/LeftHand/LeftPick/Label3D" method="_on_tutorial_timer_timeout"]
+[connection signal="timeout" from="XROrigin3D/TutorialTimer" to="XROrigin3D/RightHand/RightPick/Label3D" method="_on_tutorial_timer_timeout"]

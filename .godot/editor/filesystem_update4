@@ -22,3 +22,8 @@ res://Scripts/RightGripTimer.gd
 res://Scripts/TimeLeft.gd
 res://Materials/SkyBlue.tres
 res://Materials/DarkerSkyBlue.tres
+res://Scripts/LeftRaycast.gd
+res://Materials/Green.tres
+res://Materials/Red.tres
+res://Scenes/RightRaycast.gd
+res://Materials/Blue.tres
