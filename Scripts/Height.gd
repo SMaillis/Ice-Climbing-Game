@@ -49,4 +49,5 @@ func _on_time_left_timeout() -> void:
 	$"StartMenu".visible = true
 	game_started = false
 	score = max_height
+	time_left = 0.0
 	
